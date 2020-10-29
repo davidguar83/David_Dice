@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import jdk.jfr.Event;
 
 /**
  *
@@ -49,6 +50,7 @@ class Ventana extends JFrame implements ActionListener {
     boolean z = false;
     int rondas = 5;
     int rondasjugador = 5;
+    int num1, num2, num3, num4;
 
     public Ventana() {
 
@@ -85,116 +87,170 @@ class Ventana extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent ex) {
+
+        if (ex.getSource() == bot1) {
+            num1 = 1;
+            listajugador.add(num1);
+
+            System.out.println(num1);
+        }
+
+        if (ex.getSource() == bot2) {
+            num2 = 2;
+            listajugador.add(num2);
+            System.out.println(num2);
+        }
+
+        if (ex.getSource() == bot3) {
+            num3 = 3;
+            listajugador.add(num3);
+            System.out.println(num3);
+        }
+
+        if (ex.getSource() == bot4) {
+            num4 = 4;
+            listajugador.add(num4);
+            System.out.println(num4);
+        }
+
+        if (ex.getSource() == bot5) {
+
+            iniciarJuego(ex);
+
+        }
+
+    }
+
+    public void iniciarJuego(ActionEvent e) {
 
         Color color;
 
-        
-        do{
-        if (e.getSource() == bot5) {
+        do {
+           // if (e.getSource() == bot5) {
 
-            Random ale = new Random();
-            for (int i = 0; i < rondas; i++) {
+                Random ale = new Random();
+                for (int i = 0; i < rondas; i++) {
 
-                lista.add(ale.nextInt(3) + 1);
-
-            }
-
-            int[] mio = new int[lista.size()];
-
-            int ind = 0;
-            for (Integer value : lista) {
-
-                mio[ind++] = value;
-
-            }
-
-            for (int i = 0; i < mio.length; i++) {
-
-                if (mio[i] == 1) {
-                    String z = JOptionPane.showInputDialog("siguiente color");
-                    color = Color.blue;
-                    System.out.println("azul");
-
-                } else if (mio[i] == 2) {
-                    String z = JOptionPane.showInputDialog("siguiente color");
-                    color = Color.RED;
-                    System.out.println("rojo");
-
-                } else if (mio[i] == 3) {
-                    String z = JOptionPane.showInputDialog("siguiente color");
-                    color = Color.GREEN;
-                    System.out.println("verde");
-
-                } else {
-                    String z = JOptionPane.showInputDialog("siguiente color");
-                    color = Color.YELLOW;
-                    System.out.println("amarillo");
+                    lista.add(ale.nextInt(4) + 1);
 
                 }
 
-                contenidopanel.setBackground(color);
+                int[] mio = new int[lista.size()];
 
-            }
+                int ind = 0;
+                for (Integer value : lista) {
 
-            System.out.println(lista);
-            
-      
-            
-            
-            
-
-            for (int i = 0; i < rondasjugador; i++) {
-
-               int a=0;
-
-                if (e.getSource() == bot1) {
-                    a=1;
-                  
+                    mio[ind++] = value;
 
                 }
-                if (e.getSource() == bot2) {
-                   a=2;
-                    
+
+                for (int i = 0; i < mio.length; i++) {
+
+                    if (mio[i] == 1) {
+                        String z = JOptionPane.showInputDialog("siguiente color");
+                        color = Color.blue;
+                        System.out.println("azul");
+
+                    } else if (mio[i] == 2) {
+                        String z = JOptionPane.showInputDialog("siguiente color");
+                        color = Color.RED;
+                        System.out.println("rojo");
+
+                    } else if (mio[i] == 3) {
+                        String z = JOptionPane.showInputDialog("siguiente color");
+                        color = Color.GREEN;
+                        System.out.println("verde");
+
+                    } else {
+                        String z = JOptionPane.showInputDialog("siguiente color");
+                        color = Color.YELLOW;
+                        System.out.println("amarillo");
+
+                    }
+
+                    contenidopanel.setBackground(color);
+
                 }
 
-                if (e.getSource() == bot3) {
-                    a=3;
-                 
-                }
-                if (e.getSource() == bot4) {
-                    a=4;
-                }
-                
-               listajugador.add(a);
-               
+           // }
 
-            }
+            System.out.println("turno jugador");
+            System.out.println(listajugador);
             
-             System.out.println(listajugador);
-            
+            actionPerformed(e);
+            turnoJugador(e);
+            // pulsarBotones(e);
+            // start();
+            comprobarResultados();
+        } while (z == false);
 
-             if (lista.equals(listajugador)) {
+    }
 
-                    System.out.println("Hacertaste");
-                    puntos++;
-                    rondas++;
-                    rondasjugador++;
-                    rondaspuntos++;
-                    lista.clear();
-                    listajugador.clear();
-                } else {
+    public void comprobarResultados() {
 
-                    System.out.println("Fallaste");
-                    z = true;
+        if (lista.equals(listajugador)) {
 
-                    int puntostotal = ((rondaspuntos * 10) * puntos);
-                    System.out.println("puntos = " + puntostotal);
+            System.out.println("Hacertaste");
+            puntos++;
+            rondas++;
+            rondasjugador++;
+            rondaspuntos++;
+            lista.clear();
+            listajugador.clear();
+        } else {
 
-                }
+            System.out.println("Fallaste");
+            lista.clear();
+            z = true;
+
+            int puntostotal = ((rondaspuntos * 10) * puntos);
+            System.out.println("puntos = " + puntostotal);
+
         }
-             
-        }while(z==false);
+
+    }
+
+    public void start() {
+
+        for (int i = 0; i < rondasjugador; i++) {
+
+            int a = Integer.parseInt(JOptionPane.showInputDialog("Introduce numero"));;
+
+            listajugador.add(a);
+
+        }
+        System.out.println(listajugador);
+
+    }
+
+    public void turnoJugador(ActionEvent ee) {
+
+        if (ee.getSource() == bot1) {
+            num1 = 1;
+            listajugador.add(num1);
+
+            System.out.println(num1);
+        }
+
+        if (ee.getSource() == bot2) {
+            num2 = 2;
+            listajugador.add(num2);
+            System.out.println(num2);
+        }
+
+        if (ee.getSource() == bot3) {
+            num3 = 3;
+            listajugador.add(num3);
+            System.out.println(num3);
+        }
+
+        if (ee.getSource() == bot4) {
+            num4 = 4;
+            listajugador.add(num4);
+            System.out.println(num4);
+        }
+
     }
 
 }
