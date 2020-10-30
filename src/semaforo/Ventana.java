@@ -7,7 +7,6 @@ package semaforo;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,37 +16,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import jdk.jfr.Event;
 
 /**
  *
  * @author david
  */
-public class Semaforo {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        
-        
-        
-        VentanaJug ven1 = new VentanaJug();
-
-        ven1.setVisible(true);
-        ven1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-       
-        VentanOrde ven = new VentanOrde();
-        ven.setVisible(true);
-        ven.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    }
-
-}
-
-/*class Ventana extends JFrame implements ActionListener {
+    
+   public class Ventana extends JFrame implements ActionListener {
 
     JButton bot1, bot2, bot3, bot4, bot5;
     Container contenidopanel = null;
@@ -124,67 +100,68 @@ public class Semaforo {
 
         if (ex.getSource() == bot5) {
 
-            iniciarComprobacion(ex);
+            iniciarJuego(ex);
 
         }
 
     }
 
-    public void iniciarComprobacion(ActionEvent e) {
+    public void iniciarJuego(ActionEvent e) {
 
         Color color;
 
         do {
-            // if (e.getSource() == bot5) {
+           // if (e.getSource() == bot5) {
 
-            Random ale = new Random();
-            for (int i = 0; i < rondas; i++) {
+                Random ale = new Random();
+                for (int i = 0; i < rondas; i++) {
 
-                lista.add(ale.nextInt(4) + 1);
-
-            }
-
-            int[] mio = new int[lista.size()];
-
-            int ind = 0;
-            for (Integer value : lista) {
-
-                mio[ind++] = value;
-
-            }
-
-            for (int i = 0; i < mio.length; i++) {
-
-                if (mio[i] == 1) {
-                    String z = JOptionPane.showInputDialog("siguiente color");
-                    color = Color.blue;
-                    System.out.println("azul");
-
-                } else if (mio[i] == 2) {
-                    String z = JOptionPane.showInputDialog("siguiente color");
-                    color = Color.RED;
-                    System.out.println("rojo");
-
-                } else if (mio[i] == 3) {
-                    String z = JOptionPane.showInputDialog("siguiente color");
-                    color = Color.GREEN;
-                    System.out.println("verde");
-
-                } else {
-                    String z = JOptionPane.showInputDialog("siguiente color");
-                    color = Color.YELLOW;
-                    System.out.println("amarillo");
+                    lista.add(ale.nextInt(4) + 1);
 
                 }
 
-                contenidopanel.setBackground(color);
+                int[] mio = new int[lista.size()];
 
-            }
+                int ind = 0;
+                for (Integer value : lista) {
 
-            // }
+                    mio[ind++] = value;
+
+                }
+
+                for (int i = 0; i < mio.length; i++) {
+
+                    if (mio[i] == 1) {
+                        String z = JOptionPane.showInputDialog("siguiente color");
+                        color = Color.blue;
+                        System.out.println("azul");
+
+                    } else if (mio[i] == 2) {
+                        String z = JOptionPane.showInputDialog("siguiente color");
+                        color = Color.RED;
+                        System.out.println("rojo");
+
+                    } else if (mio[i] == 3) {
+                        String z = JOptionPane.showInputDialog("siguiente color");
+                        color = Color.GREEN;
+                        System.out.println("verde");
+
+                    } else {
+                        String z = JOptionPane.showInputDialog("siguiente color");
+                        color = Color.YELLOW;
+                        System.out.println("amarillo");
+
+                    }
+
+                    contenidopanel.setBackground(color);
+
+                }
+
+           // }
+
             System.out.println("turno jugador");
             System.out.println(listajugador);
-
+            
             actionPerformed(e);
             turnoJugador(e);
             // pulsarBotones(e);
@@ -260,4 +237,8 @@ public class Semaforo {
 
     }
 
-}*/
+}
+    
+    
+    
+
